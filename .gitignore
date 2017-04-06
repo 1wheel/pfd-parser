@@ -1,4 +1,5 @@
 node_modules
 test/data/**/*.pdf
 test/data/**/*.csv
+test/out/*.csv
 !test/data/**/Kushner, Jared.pdf

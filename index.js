@@ -11,6 +11,7 @@ global.DOMParser = require('./lib/domparsermock.js').DOMParserMock;
 var pdfjsLib = require('pdfjs-dist');
 
 const filePath = `${__dirname}/test/data/`;
+const outPath = `${__dirname}/test/out/`;
 let skipHeaders = {};
 
 function processFiling(pdfPath) {
@@ -152,7 +153,7 @@ function processFiling(pdfPath) {
         const fileName = path.basename(pdfPath, '.pdf').replace('.PDF','');
         return new Promise((resolve, reject) => {
             tables.forEach(table => {
-                const csvFile = `${filePath + table.name.toLowerCase().replace(/[ ,']+/g, '-')}.csv`;
+                const csvFile = `${outPath + table.name.toLowerCase().replace(/[ ,']+/g, '-')}.csv`;
 
                 table.rows.forEach(row => {
                     row.file = fileName;
