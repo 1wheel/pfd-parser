@@ -187,5 +187,21 @@ for (let pos = 1; pos < files.length; pos++) {
             console.log);
 }
 filingPromise.then(() => {
+    var allAssets = [
+        'filer-s-employment-assets-&-income-and-retirement-accounts.csv',
+        'other-assets-and-income.csv',
+        'spouse-s-employment-assets-&-income-and-retirement-accounts.csv'
+    ].reduce(function(p, v){
+
+        var rows = dsv.csvParse(fs.readFileSync(outPath + v, 'utf-8'))
+
+        console.log(v, rows.columns)
+        rows.forEach(d => d.type = v)
+
+        return p.concat(rows)
+    }, [])
+
+    fs.writeFileSync(outPath + 'all-assets.csv', dsv.csvFormat(allAssets))
+
     console.log('done');
 });
